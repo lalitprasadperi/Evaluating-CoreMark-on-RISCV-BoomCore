@@ -21,31 +21,36 @@
 OUTFLAG= -o
 # Flag: CC
 #	Use this flag to define compiler to use
-CC?= gcc
+#CC? = gcc
+#PORT_CFLAGS = -O2 -static
+
+CC = riscv64-unknown-elf-gcc
+PORT_CFLAGS := -O2 -std=gnu11 -Wall -march=rv64imafd -static -DUSE_CLOCK -funroll-loops
+#-march=rv64imafd
+#-specs=htif_nano.specs 
 
 # Flag: CFLAGS
 #	Use this flag to define compiler options. Note, you can add compiler options from the command line using XCFLAGS="other flags"
-PORT_CFLAGS = -O0
 FLAGS_STR = "$(PORT_CFLAGS) $(XCFLAGS) $(XLFLAGS) $(LFLAGS_END)"
-CFLAGS = $(PORT_CFLAGS) -I$(PORT_DIR) -Ilinux -I. -DFLAGS_STR=\"$(FLAGS_STR)\"
+CFLAGS = $(PORT_CFLAGS) -I$(PORT_DIR) -Iriscv -I. -DRISCV -DFLAGS_STR=\"$(FLAGS_STR)\"
 # Flag: NO_LIBRT
 #	Define if the platform does not provide a librt
 ifndef NO_LIBRT
 #Flag: LFLAGS_END
 #	Define any libraries needed for linking or other flags that should come at the end of the link line (e.g. linker scripts). 
 #	Note: On certain platforms, the default clock_gettime implementation is supported but requires linking of librt.
-LFLAGS_END += -lrt
+#LFLAGS_END += -lrt
 endif
 # Flag: PORT_SRCS
 #	Port specific source files can be added here
-PORT_SRCS = linux/core_portme.c
-vpath %.c linux
-vpath %.h linux
-vpath %.mak linux
+PORT_SRCS = riscv/core_portme.c
+vpath %.c riscv
+vpath %.h riscv
+vpath %.mak riscv
 # Flag: EXTRA_DEPENDS
 #	Port specific extra build dependencies.
 #	Some ports inherit from us, so ensure this Makefile is always a dependency.
-EXTRA_DEPENDS += linux/core_portme.mak
+EXTRA_DEPENDS += riscv/core_portme.mak
 # Flag: LOAD
 #	Define this flag if you need to load to a target, as in a cross compile environment.
 
@@ -66,14 +71,15 @@ LOAD = echo Loading done
 RUN = 
 
 OEXT = .o
-EXE = .exe
+EXE = .riscv
 
 # Flag: SEPARATE_COMPILE
 # Define if you need to separate compilation from link stage. 
 # In this case, you also need to define below how to create an object file, and how to link.
 ifdef SEPARATE_COMPILE
 
-LD	= gcc
+#LD	= gcc
+LD      = riscv64-unknown-elf-gcc
 OBJOUT 	= -o
 LFLAGS 	=
 OFLAG 	= -o
@@ -86,7 +92,7 @@ PORT_CLEAN = *$(OEXT)
 $(OPATH)%$(OEXT) : %.c
 	$(CC) $(CFLAGS) $(XCFLAGS) $(COUT) $< $(OBJOUT) $@
 
-$(OPATH)$(PORT_DIR)/%$(OEXT) : linux/%.c
+$(OPATH)$(PORT_DIR)/%$(OEXT) : riscv/%.c
 	$(CC) $(CFLAGS) $(XCFLAGS) $(COUT) $< $(OBJOUT) $@
 
 endif

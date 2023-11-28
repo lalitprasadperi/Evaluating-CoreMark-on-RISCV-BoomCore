@@ -1,0 +1,53 @@
+2K performance run parameters for coremark.
+CoreMark Size    : 666
+Total ticks      : 11841
+Total time (secs): 11.841000
+Iterations/Sec   : 9289.755933
+Iterations       : 110000
+Compiler version : GCC9.4.0
+Compiler flags   : -O1   -lrt
+Memory location  : Please put data memory location here
+			(e.g. code in flash, data on heap etc)
+seedcrc          : 0xe9f5
+[0]crclist       : 0xe714
+[0]crcmatrix     : 0x1fd7
+[0]crcstate      : 0x8e3a
+[0]crcfinal      : 0x33ff
+Correct operation validated. See README.md for run and reporting rules.
+CoreMark 1.0 : 9289.755933 / GCC9.4.0 -O1   -lrt / Heap
+
+ Performance counter stats for 'system wide':
+
+   227,937,359,242      cpu-cycles                                                    (19.93%)
+   143,901,041,640      instructions              #    0.63  insn per cycle         
+                                                  #    3.22  stalled cycles per insn  (24.95%)
+    49,214,919,291      stalled-cycles-backend    #   21.59% backend cycles idle      (24.97%)
+   463,202,254,107      stalled-cycles-frontend   #  203.21% frontend cycles idle     (15.04%)
+    38,506,087,169      L1-dcache-loads                                               (20.05%)
+       979,376,888      L1-dcache-load-misses     #    2.54% of all L1-dcache accesses  (25.06%)
+   <not supported>      L1-dcache-stores                                            
+   <not supported>      L1-dcache-store-misses                                      
+       924,002,228      L1-dcache-prefetches                                          (20.04%)
+                 0      L1-dcache-prefetch-misses                                     (20.05%)
+    58,252,217,617      L1-icache-loads                                               (10.03%)
+     1,312,681,276      L1-icache-load-misses     #    2.25% of all L1-icache accesses  (10.03%)
+        93,936,055      L1-icache-prefetches                                          (15.04%)
+   <not supported>      L1-icache-prefetch-misses                                   
+     2,381,008,951      LLC-loads                                                     (15.02%)
+       483,007,305      LLC-load-misses           #   20.29% of all LL-cache accesses  (15.01%)
+       698,760,618      LLC-stores                                                    (9.99%)
+   <not supported>      LLC-store-misses                                            
+   <not supported>      LLC-prefetch-misses                                         
+    36,890,725,447      dTLB-loads                                                    (14.98%)
+        37,448,602      dTLB-load-misses          #    0.10% of all dTLB cache accesses  (14.96%)
+   <not supported>      dTLB-stores                                                 
+   <not supported>      dTLB-store-misses                                           
+   <not supported>      dTLB-prefetches                                             
+   <not supported>      dTLB-prefetch-misses                                        
+    57,122,772,602      iTLB-loads                                                    (14.95%)
+         5,503,070      iTLB-load-misses          #    0.01% of all iTLB cache accesses  (9.97%)
+    40,248,827,851      branch-loads                                                  (14.95%)
+       765,537,447      branch-load-misses                                            (19.93%)
+
+      13.077702451 seconds time elapsed
+
